@@ -20,8 +20,7 @@ export const metadata: Metadata = {
     default: "TioElvis | Elvis Vera - Personal Portfolio",
     template: "%s | TioElvis",
   },
-  description:
-    "Personal portfolio created by Elvis Vera (TioElvis) where I document my projects, code, and continuous learning.",
+  description: "Personal portfolio created by Elvis Vera (TioElvis).",
   keywords: [
     "Elvis Vera",
     "TioElvis",
