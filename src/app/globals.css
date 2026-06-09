@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-surface: var(--background-surface);
+  --color-background-code: var(--background-code);
+  --color-background-overlay: var(--background-overlay);
+
+  --color-primary: var(--green-bright);
+  --color-primary-base: var(--green-base);
+  --color-primary-deep: var(--green-deep);
+  --color-primary-muted: var(--green-muted);
+
+  --color-secondary: var(--red-base);
+  --color-secondary-deep: var(--red-deep);
+  --color-secondary-bright: var(--red-bright);
+  --color-secondary-muted: var(--red-muted);
+
+  --color-accent: var(--yellow-base);
+  --color-accent-muted: var(--yellow-muted);
+
+  --color-info: var(--blue-base);
+  --color-info-accent: var(--blue-accent);
+  --color-info-muted: var(--blue-muted);
+
+  --color-foreground: var(--text-primary);
+  --color-muted-foreground: var(--text-secondary);
+  --color-ghost-foreground: var(--text-muted);
+  --color-inverse-foreground: var(--text-inverse);
+
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-primary: var(--border-green);
+  --color-border-secondary: var(--border-red);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-heading);
+}
+
+:root {
+  --background: #0d1117;
+  --background-surface: #161b22;
+  --background-code: #21262d;
+  --background-overlay: #0a0e13;
+
+  --green-bright: #00ff41;
+  --green-base: #00c561;
+  --green-deep: #005f2e;
+  --green-muted: #0b2a17;
+
+  --red-base: #cf2e2e;
+  --red-deep: #a32020;
+  --red-bright: #ff4b4b;
+  --red-muted: #2a0b0b;
+
+  --yellow-base: #f4c430;
+  --yellow-muted: #1a1200;
+
+  --blue-base: #003893;
+  --blue-accent: #4c8ecc;
+  --blue-muted: #0a1b2e;
+
+  --text-primary: #e8e8e8;
+  --text-secondary: #8b949e;
+  --text-muted: #556b72;
+  --text-inverse: #0d1117;
+
+  --border: #30363d;
+  --border-subtle: #21262d;
+  --border-green: #005f2e;
+  --border-red: #a32020;
+
+  --radius: 0.25rem;
+}
+
+@layer base {
+  html {
+    @apply antialiased font-sans;
+  }
+  body {
+    @apply min-h-screen flex flex-col bg-background text-foreground;
+  }
+  h1 {
+    @apply text-4xl font-bold tracking-tight leading-tight;
+  }
+  h2 {
+    @apply text-3xl font-semibold tracking-tight leading-snug;
+  }
+  h3 {
+    @apply text-2xl font-semibold leading-snug;
+  }
+  h4 {
+    @apply text-xl font-medium leading-normal;
+  }
+  p,
+  input {
+    @apply text-sm md:text-base;
+  }
+}
