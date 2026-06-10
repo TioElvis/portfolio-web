@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const TIOELVIS_ASCII = [
+export const ASCII_TIOELVIS = [
   `
 ████████╗
 ╚══██╔══╝
