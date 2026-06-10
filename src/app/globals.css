@@ -104,4 +104,8 @@
   input {
     @apply text-sm md:text-base;
   }
+  pre {
+    font-family: var(--font-geist-mono), monospace;
+    @apply leading-none tracking-normal whitespace-pre;
+  }
 }
