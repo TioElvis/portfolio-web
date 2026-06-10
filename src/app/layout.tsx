@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 
 import { GSAPProvider } from "@/providers/gsap";
 
+import { StartAnimation } from "@/components/start-animation";
+
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-heading",
@@ -45,7 +47,9 @@ export default function Layout({ children }: Props) {
       lang="en"
       className={cn(cormorantGaramond.variable, jetBrainsMono.variable)}>
       <GSAPProvider>
-        <body>{children}</body>
+        <body>
+          <StartAnimation>{children}</StartAnimation>
+        </body>
       </GSAPProvider>
     </html>
   );
