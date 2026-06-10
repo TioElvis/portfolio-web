@@ -83,7 +83,7 @@
 
 @layer base {
   html {
-    @apply antialiased font-sans;
+    @apply antialiased font-mono;
   }
   body {
     @apply min-h-screen flex flex-col bg-background text-foreground;
