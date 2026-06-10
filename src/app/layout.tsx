@@ -4,6 +4,8 @@ import { Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
+import { GSAPProvider } from "@/providers/gsap";
+
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-heading",
@@ -42,7 +44,9 @@ export default function Layout({ children }: Props) {
     <html
       lang="en"
       className={cn(cormorantGaramond.variable, jetBrainsMono.variable)}>
-      <body>{children}</body>
+      <GSAPProvider>
+        <body>{children}</body>
+      </GSAPProvider>
     </html>
   );
 }
