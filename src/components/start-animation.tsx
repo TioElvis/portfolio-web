@@ -1,14 +1,12 @@
 "use client";
 import { Fragment, useEffect, useRef, useState } from "react";
 
-import { ASCII_TIOELVIS } from "@/lib/utils";
-
 import { useIsMounted } from "@/hooks/use-is-mounted";
 
-import { PreASCII } from "@/components/pre-ascii";
-import { LoadingBar } from "@/components/loading-bar";
-import { TerminalAlert } from "@/components/terminal-alert";
-import { MaxWidthWrapper } from "@/components/max-width-wrapper";
+import { LoadingBar } from "./loading-bar";
+import { TerminalAlert } from "./terminal-alert";
+import { TioElvisASCII } from "./tio-elvis-ascii";
+import { MaxWidthWrapper } from "./max-width-wrapper";
 
 export const ALERTS = [
   {
@@ -81,17 +79,7 @@ export function StartAnimation({ children }: Props) {
         <Fragment>{children}</Fragment>
       ) : (
         <MaxWidthWrapper className="flex flex-col items-center justify-center gap-8">
-          <article ref={asciiTextRef} className="flex">
-            {ASCII_TIOELVIS.map((e, index) => {
-              return (
-                <PreASCII
-                  key={index}
-                  className="text-[9px] sm:text-xs md:text-sm text-primary">
-                  {e}
-                </PreASCII>
-              );
-            })}
-          </article>
+          <TioElvisASCII className="text-[9px] sm:text-xs md:text-sm" />
           <section className="w-full md:w-2xl flex flex-col gap-2">
             {ALERTS.map((e, index) => {
               return (
