@@ -1,3 +1,3 @@
 export function About() {
-  return <section></section>;
+  return <section id="about" className="w-full min-h-screen"></section>;
 }

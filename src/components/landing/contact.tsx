@@ -1,3 +1,3 @@
 export function Contact() {
-  return <footer></footer>;
+  return <footer id="contact" className="w-full min-h-screen"></footer>;
 }
