@@ -1,6 +1,4 @@
 "use client";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 
 import { ASCII_TIOELVIS } from "@/lib/utils";
@@ -67,20 +65,10 @@ export function StartAnimation({ children }: Props) {
 
   const isMounted = useIsMounted();
 
-  useGSAP(() => {
-    if (!isMounted) return;
-
-    gsap.fromTo(
-      asciiTextRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1 },
-    );
-  }, []);
-
   useEffect(() => {
     if (!isMounted) return;
 
-    const timeoutId = setTimeout(() => setShowLanding(true), 5000);
+    const timeoutId = setTimeout(() => setShowLanding(true), 4000);
 
     return () => clearTimeout(timeoutId);
   }, [isMounted]);

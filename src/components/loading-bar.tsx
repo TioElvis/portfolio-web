@@ -14,13 +14,13 @@ export function LoadingBar() {
     tl.fromTo(
       sectionRef.current,
       { opacity: 0 },
-      { opacity: 1, delay: 3, duration: 1 },
+      { opacity: 1, delay: 2.5, duration: 1 },
     ).fromTo(
       loadingBarRef.current,
       { width: "0%" },
       {
         width: "100%",
-        duration: 1.5,
+        duration: 1,
         onUpdate() {
           const ratio = this.ratio;
           setProgress(Math.round(ratio * 100));
