@@ -41,6 +41,8 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
+  --color-destructive: var(--destructive);
+
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-heading);
 }
@@ -78,6 +80,8 @@
   --border-green: #005f2e;
   --border-red: #a32020;
 
+  --destructive: #e7000b;
+
   --radius: 0.25rem;
 }
 
@@ -107,5 +111,8 @@
   pre {
     font-family: var(--font-geist-mono), monospace;
     @apply leading-none tracking-normal whitespace-pre;
+  }
+  button {
+    @apply cursor-pointer;
   }
 }
