@@ -4,3 +4,8 @@ export type Alert = {
   isOk: boolean;
   statusMessage: string;
 };
+
+export type Command = {
+  arguments: string[];
+  return: string;
+};
