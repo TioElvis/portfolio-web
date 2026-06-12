@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { TioElvisASCII } from "@/components/tio-elvis-ascii";
+import { TioElvisASCII } from "@/components/tioelvis-ascii";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useIsMounted } from "@/hooks/use-is-mounted";

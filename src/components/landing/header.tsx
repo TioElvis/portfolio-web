@@ -1,5 +1,5 @@
 import { Navbar } from "./navbar";
-import { TioElvisASCII } from "@/components/tio-elvis-ascii";
+import { TioElvisASCII } from "@/components/tioelvis-ascii";
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 
 export function Header() {

@@ -1,27 +1,29 @@
 "use client";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { useIsMounted } from "@/hooks/use-is-mounted";
 
 import { LoadingBar } from "./loading-bar";
 import { TerminalAlert } from "./terminal-alert";
-import { TioElvisASCII } from "./tio-elvis-ascii";
+import { TioElvisASCII } from "./tioelvis-ascii";
 import { MaxWidthWrapper } from "./max-width-wrapper";
 
 export const ALERTS = [
   {
     alert: {
       cause: "system",
-      title: "Compiling project",
-      message: "OK",
+      message: "Compiling project",
+      status: true,
+      statusMessage: "ok",
     },
     delay: 0.5,
   },
   {
     alert: {
       cause: "boot",
-      title: "Loading network service",
-      message: "OK",
+      message: "Loading network service",
+      status: true,
+      statusMessage: "ok",
     },
     delay: 1,
   },
@@ -29,24 +31,27 @@ export const ALERTS = [
   {
     alert: {
       cause: "boot",
-      title: "Loading pages",
-      message: "OK",
+      message: "Loading pages",
+      status: true,
+      statusMessage: "ok",
     },
     delay: 1.5,
   },
   {
     alert: {
       cause: "init",
-      title: "Initializing user interface",
-      message: "OK",
+      message: "Initializing user interface",
+      status: true,
+      statusMessage: "ok",
     },
     delay: 2,
   },
   {
     alert: {
       cause: "done",
-      title: "System ready",
-      message: "FINISH",
+      message: "System ready",
+      status: true,
+      statusMessage: "finish",
     },
     delay: 2.5,
   },
@@ -58,8 +63,6 @@ interface Props {
 
 export function StartAnimation({ children }: Props) {
   const [showLanding, setShowLanding] = useState(false);
-
-  const asciiTextRef = useRef(null);
 
   const isMounted = useIsMounted();
 
@@ -83,7 +86,12 @@ export function StartAnimation({ children }: Props) {
           <section className="w-full md:w-2xl flex flex-col gap-2">
             {ALERTS.map((e, index) => {
               return (
-                <TerminalAlert alert={e.alert} delay={e.delay} key={index} />
+                <TerminalAlert
+                  alert={e.alert}
+                  delay={e.delay}
+                  key={index}
+                  animated
+                />
               );
             })}
           </section>

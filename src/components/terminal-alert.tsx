@@ -3,19 +3,25 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 
+import { cn } from "@/lib/utils";
+
 interface Props {
   alert: {
     cause: string;
-    title: string;
     message: string;
+    status: boolean;
+    statusMessage: string;
   };
-  delay: number;
+  delay?: number;
+  animated?: boolean;
 }
 
-export function TerminalAlert({ alert, delay }: Props) {
+export function TerminalAlert({ alert, delay = 0, animated = false }: Props) {
   const alertRef = useRef(null);
 
   useGSAP(() => {
+    if (!animated) return;
+
     const tl = gsap.timeline();
 
     tl.fromTo(
@@ -31,10 +37,15 @@ export function TerminalAlert({ alert, delay }: Props) {
         <span>
           [<span className="text-accent">{alert.cause.toUpperCase()}</span>]
         </span>
-        <span>{alert.title}</span>
+        <span>{alert.message}</span>
       </div>
       <div>
-        [<span className="text-primary">{alert.message}</span>]
+        [
+        <span
+          className={cn(!alert.status ? "text-destructive" : "text-primary")}>
+          {alert.statusMessage.toLocaleUpperCase()}
+        </span>
+        ]
       </div>
     </div>
   );
