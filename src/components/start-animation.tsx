@@ -3,17 +3,19 @@ import { Fragment, useEffect, useState } from "react";
 
 import { useIsMounted } from "@/hooks/use-is-mounted";
 
+import type { TTerminalAlert } from "@/types/terminal";
+
 import { LoadingBar } from "./loading-bar";
 import { TerminalAlert } from "./terminal-alert";
 import { TioElvisASCII } from "./tioelvis-ascii";
 import { MaxWidthWrapper } from "./max-width-wrapper";
 
-export const ALERTS = [
+export const ALERTS: { alert: TTerminalAlert; delay: number }[] = [
   {
     alert: {
       cause: "system",
       message: "Compiling project",
-      status: true,
+      isOk: true,
       statusMessage: "ok",
     },
     delay: 0.5,
@@ -22,7 +24,7 @@ export const ALERTS = [
     alert: {
       cause: "boot",
       message: "Loading network service",
-      status: true,
+      isOk: true,
       statusMessage: "ok",
     },
     delay: 1,
@@ -32,7 +34,7 @@ export const ALERTS = [
     alert: {
       cause: "boot",
       message: "Loading pages",
-      status: true,
+      isOk: true,
       statusMessage: "ok",
     },
     delay: 1.5,
@@ -41,7 +43,7 @@ export const ALERTS = [
     alert: {
       cause: "init",
       message: "Initializing user interface",
-      status: true,
+      isOk: true,
       statusMessage: "ok",
     },
     delay: 2,
@@ -50,7 +52,7 @@ export const ALERTS = [
     alert: {
       cause: "done",
       message: "System ready",
-      status: true,
+      isOk: true,
       statusMessage: "finish",
     },
     delay: 2.5,

@@ -5,13 +5,10 @@ import { useGSAP } from "@gsap/react";
 
 import { cn } from "@/lib/utils";
 
+import type { TTerminalAlert } from "@/types/terminal";
+
 interface Props {
-  alert: {
-    cause: string;
-    message: string;
-    status: boolean;
-    statusMessage: string;
-  };
+  alert: TTerminalAlert;
   delay?: number;
   animated?: boolean;
 }
@@ -41,8 +38,7 @@ export function TerminalAlert({ alert, delay = 0, animated = false }: Props) {
       </div>
       <div>
         [
-        <span
-          className={cn(!alert.status ? "text-destructive" : "text-primary")}>
+        <span className={cn(alert.isOk ? "text-primary" : "text-destructive")}>
           {alert.statusMessage.toLocaleUpperCase()}
         </span>
         ]
