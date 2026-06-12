@@ -5,10 +5,10 @@ import { useGSAP } from "@gsap/react";
 
 import { cn } from "@/lib/utils";
 
-import type { TTerminalAlert } from "@/types/terminal";
+import type { Alert } from "@/types/terminal";
 
 interface Props {
-  alert: TTerminalAlert;
+  alert: Alert;
   delay?: number;
   animated?: boolean;
 }

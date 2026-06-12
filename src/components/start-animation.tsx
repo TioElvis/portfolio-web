@@ -3,14 +3,14 @@ import { Fragment, useEffect, useState } from "react";
 
 import { useIsMounted } from "@/hooks/use-is-mounted";
 
-import type { TTerminalAlert } from "@/types/terminal";
+import type { Alert } from "@/types/terminal";
 
 import { LoadingBar } from "./loading-bar";
 import { TerminalAlert } from "./terminal-alert";
 import { TioElvisASCII } from "./tioelvis-ascii";
 import { MaxWidthWrapper } from "./max-width-wrapper";
 
-export const ALERTS: { alert: TTerminalAlert; delay: number }[] = [
+export const ALERTS: { alert: Alert; delay: number }[] = [
   {
     alert: {
       cause: "system",

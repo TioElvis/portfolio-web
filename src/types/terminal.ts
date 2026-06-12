@@ -1,4 +1,4 @@
-export type TTerminalAlert = {
+export type Alert = {
   cause: string;
   message: string;
   isOk: boolean;
