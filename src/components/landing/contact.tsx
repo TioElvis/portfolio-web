@@ -10,7 +10,7 @@ export function Contact() {
         <div className="flex items-center justify-center gap-4">
           <RenderTextASCII
             ASCII_TEXT={ASCII_CONTACT}
-            className="text-[5px] sm:text-[6px] md:text-[7px] lg:text-[8px]"
+            className="text-[4px] sm:text-[6px] md:text-[7px] lg:text-[8px]"
           />
         </div>
       </MaxWidthWrapper>

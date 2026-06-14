@@ -37,7 +37,7 @@ export function About() {
       id="about"
       className="w-full min-h-screen scroll-mt-20 md:scroll-mt-0 md:flex md:justify-center md:items-center">
       <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
-        <div className="flex items-center justify-center gap-4 text-[5px] sm:text-[6px] md:text-[7px] lg:text-[8px]">
+        <div className="flex items-center justify-center gap-4 text-[4px] sm:text-[6px] md:text-[7px] lg:text-[8px]">
           <RenderTextASCII ASCII_TEXT={ASCII_ABOUT} />
           <RenderTextASCII ASCII_TEXT={ASCII_ME} />
         </div>

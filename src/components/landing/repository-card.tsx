@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { getAllRepositories } from "@/lib/octokit";
 
 import {
@@ -25,9 +26,12 @@ export function RepositoryCard({ repository }: Props) {
         <CardDescription>{repository.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>
-          Language: <span className="text-primary">{repository.language}</span>
-        </p>
+        {repository.language && (
+          <p>
+            Language:{" "}
+            <span className="text-primary">{repository.language}</span>
+          </p>
+        )}
       </CardContent>
       <CardFooter className="gap-4 justify-end">
         {repository.homepage && (
