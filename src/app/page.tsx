@@ -6,6 +6,8 @@ import { Header } from "@/components/landing/header";
 import { Contact } from "@/components/landing/contact";
 import { Projects } from "@/components/landing/projects";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
   return (
     <Fragment>
