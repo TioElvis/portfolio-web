@@ -5,10 +5,8 @@ import { getAllRepositories } from "@/lib/octokit";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -22,8 +20,8 @@ export function RepositoryCard({ repository }: Props) {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>{repository.name}</CardTitle>
-        <CardDescription>{repository.description}</CardDescription>
+        <p className="font-bold">{repository.name}</p>
+        <p className="text-muted-foreground">{repository.description}</p>
       </CardHeader>
       <CardContent>
         {repository.language && (

@@ -16,16 +16,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { RenderTextASCII } from "@/components/render-text-ascii";
-import { MobileArrowDown } from "@/components/mobile-arrow-down";
 
 export async function Projects() {
   const repositories = await getAllRepositories({ per_page: 3 });
 
   return (
-    <section
-      id="projects"
-      className="w-full min-h-screen scroll-mt-20 md:scroll-mt-0 md:flex md:justify-center md:items-center">
-      <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
+    <section id="projects" className="w-full h-dvh scroll-mt-20">
+      <MaxWidthWrapper className="flex flex-col gap-4">
         <div className="flex items-center justify-center gap-4 text-[4px] sm:text-[6px] md:text-[7px] lg:text-[8px]">
           <RenderTextASCII ASCII_TEXT={ASCII_LAST} />
           <RenderTextASCII ASCII_TEXT={ASCII_PROJECTS} />
@@ -61,7 +58,6 @@ export async function Projects() {
             }
           />
         )}
-        <MobileArrowDown />
       </MaxWidthWrapper>
     </section>
   );

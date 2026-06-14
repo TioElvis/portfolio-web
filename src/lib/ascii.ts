@@ -533,20 +533,6 @@ export const ASCII_CONTACT = [
 `,
 ];
 
-export const ASCII_ARROW_DOWN = [
-  `
-    ██║   
-    ██║   
-    ██║   
-██████████╗
-╚████████╔╝
- ╚██████╔╝ 
-  ╚████╔╝  
-   ╚██╔╝   
-    ╚═╝    
-`,
-];
-
 export const ASCII_PENGUIN = [
   `
     ________o8A888888o_

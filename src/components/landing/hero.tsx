@@ -7,12 +7,11 @@ import {
 
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { RenderTextASCII } from "@/components/render-text-ascii";
-import { MobileArrowDown } from "@/components/mobile-arrow-down";
 import { InteractiveShell } from "@/components/interactive-shell";
 
 export function Hero() {
   return (
-    <section id="hero" className="w-full h-screen py-20">
+    <section id="hero" className="w-full h-dvh py-20">
       <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
         <section className="w-full flex items-center gap-4 text-[3px] md:text-[4px] lg:text-[5px]">
           <div>
@@ -37,7 +36,6 @@ export function Hero() {
           </div>
         </section>
         <InteractiveShell />
-        <MobileArrowDown />
       </MaxWidthWrapper>
     </section>
   );

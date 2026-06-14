@@ -31,7 +31,7 @@ const CONTACTS = [
 
 export function Contact() {
   return (
-    <footer id="contact" className="w-full scroll-mt-20 md:scroll-mt-0 py-12">
+    <footer id="contact" className="w-full h-dvh scroll-mt-20">
       <MaxWidthWrapper className="flex flex-col items-center gap-4">
         <div className="flex items-center justify-center gap-4">
           <RenderTextASCII
@@ -60,7 +60,10 @@ export function Contact() {
             })}
           </div>
           <div className="flex-1 p-4 rounded-md">
-            <RenderTextASCII ASCII_TEXT={ASCII_PENGUIN} />
+            <RenderTextASCII
+              ASCII_TEXT={ASCII_PENGUIN}
+              className="text-[6px] sm:text-[7px] md:text-[8px]"
+            />
           </div>
         </div>
         <section className="text-center">

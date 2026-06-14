@@ -1,6 +1,8 @@
 "use client";
 import { Fragment, useRef, useEffect } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { useInteractiveShell } from "@/hooks/use-interactive-shell";
 
 import { TerminalAlert } from "./terminal-alert";
@@ -9,7 +11,9 @@ import { ScrollArea } from "./ui/scroll-area";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
-export function InteractiveShell() {
+type Props = React.ComponentProps<"div">;
+
+export function InteractiveShell({ className, ...props }: Props) {
   const { input, setInput, display, handleKeyDown } = useInteractiveShell();
 
   const endRef = useRef<HTMLDivElement>(null);
@@ -35,7 +39,7 @@ export function InteractiveShell() {
   }, [display]);
 
   return (
-    <Card className="w-full flex-1">
+    <Card className={cn("w-full flex-1", className)} {...props}>
       <CardContent className="flex-1 overflow-hidden min-h-0">
         <ScrollArea className="h-full">
           {display.map((e, index) => {

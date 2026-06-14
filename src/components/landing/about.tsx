@@ -7,7 +7,6 @@ import { ASCII_ABOUT, ASCII_ME } from "@/lib/ascii";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
-import { MobileArrowDown } from "@/components/mobile-arrow-down";
 import { RenderTextASCII } from "@/components/render-text-ascii";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
@@ -33,10 +32,8 @@ export function About() {
   const isMobile = useIsMobile();
 
   return (
-    <section
-      id="about"
-      className="w-full min-h-screen scroll-mt-20 md:scroll-mt-0 md:flex md:justify-center md:items-center">
-      <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
+    <section id="about" className="w-full h-dvh scroll-mt-20">
+      <MaxWidthWrapper className="flex flex-col gap-4">
         <div className="flex items-center justify-center gap-4 text-[4px] sm:text-[6px] md:text-[7px] lg:text-[8px]">
           <RenderTextASCII ASCII_TEXT={ASCII_ABOUT} />
           <RenderTextASCII ASCII_TEXT={ASCII_ME} />
@@ -85,7 +82,6 @@ export function About() {
             </div>
           )}
         </div>
-        <MobileArrowDown />
       </MaxWidthWrapper>
     </section>
   );
