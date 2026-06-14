@@ -7,6 +7,7 @@ import { ASCII_ABOUT, ASCII_ME } from "@/lib/ascii";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
+import { MobileArrowDown } from "@/components/mobile-arrow-down";
 import { RenderTextASCII } from "@/components/render-text-ascii";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
@@ -84,6 +85,7 @@ export function About() {
             </div>
           )}
         </div>
+        <MobileArrowDown />
       </MaxWidthWrapper>
     </section>
   );

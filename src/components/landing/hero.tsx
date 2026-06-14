@@ -1,21 +1,16 @@
-"use client";
 import {
-  ASCII_ARROW_DOWN,
   ASCII_BACKEND,
   ASCII_DEVELOPER,
   ASCII_ETHICAL,
   ASCII_HACKER,
 } from "@/lib/ascii";
 
-import { useIsMobile } from "@/hooks/use-mobile";
-
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { RenderTextASCII } from "@/components/render-text-ascii";
+import { MobileArrowDown } from "@/components/mobile-arrow-down";
 import { InteractiveShell } from "@/components/interactive-shell";
 
 export function Hero() {
-  const isMobile = useIsMobile();
-
   return (
     <section id="hero" className="w-full h-screen py-20">
       <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
@@ -42,14 +37,7 @@ export function Hero() {
           </div>
         </section>
         <InteractiveShell />
-        {isMobile && (
-          <div className="w-full h-48 flex items-center justify-center">
-            <RenderTextASCII
-              ASCII_TEXT={ASCII_ARROW_DOWN}
-              className="text-[6px]"
-            />
-          </div>
-        )}
+        <MobileArrowDown />
       </MaxWidthWrapper>
     </section>
   );
