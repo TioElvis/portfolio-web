@@ -5,7 +5,7 @@ import { RenderTextASCII } from "@/components/render-text-ascii";
 
 export function Projects() {
   return (
-    <section id="projects" className="w-full min-h-screen py-20">
+    <section id="projects" className="w-full min-h-screen scroll-mt-20">
       <MaxWidthWrapper>
         <div className="flex items-center justify-center gap-4">
           <RenderTextASCII
