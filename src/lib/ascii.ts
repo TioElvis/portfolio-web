@@ -64,7 +64,7 @@ export const ASCII_TIOELVIS = [
 ███████║
 ╚══════╝
 `,
-];
+] as string[];
 
 export const ASCII_BACKEND = [
   `

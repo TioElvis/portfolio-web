@@ -1,14 +1,16 @@
 "use client";
 import { Fragment, useEffect, useState } from "react";
 
-import { useIsMounted } from "@/hooks/use-is-mounted";
-
 import type { Alert } from "@/types/terminal";
+
+import { ASCII_TIOELVIS } from "@/lib/ascii";
 
 import { LoadingBar } from "./loading-bar";
 import { TerminalAlert } from "./terminal-alert";
-import { TioElvisASCII } from "./tioelvis-ascii";
 import { MaxWidthWrapper } from "./max-width-wrapper";
+import { RenderTextASCII } from "./render-text-ascii";
+
+import { useIsMounted } from "@/hooks/use-is-mounted";
 
 export const ALERTS: { alert: Alert; delay: number }[] = [
   {
@@ -84,7 +86,10 @@ export function StartAnimation({ children }: Props) {
         <Fragment>{children}</Fragment>
       ) : (
         <MaxWidthWrapper className="flex flex-col items-center justify-center gap-8">
-          <TioElvisASCII className="text-[9px] sm:text-xs md:text-sm" />
+          <RenderTextASCII
+            ASCII_TEXT={ASCII_TIOELVIS}
+            className="text-[9px] sm:text-xs md:text-sm"
+          />
           <section className="w-full md:w-2xl flex flex-col gap-2">
             {ALERTS.map((e, index) => {
               return (

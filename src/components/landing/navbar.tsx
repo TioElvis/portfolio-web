@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { IconMenu2 } from "@tabler/icons-react";
 
+import { ASCII_TIOELVIS } from "@/lib/ascii";
+
 import {
   Sheet,
   SheetContent,
@@ -10,7 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { TioElvisASCII } from "@/components/tioelvis-ascii";
+import { RenderTextASCII } from "@/components/render-text-ascii";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useIsMounted } from "@/hooks/use-is-mounted";
@@ -55,7 +57,10 @@ export function Navbar() {
           />
           <SheetContent className="space-y-4">
             <SheetHeader>
-              <TioElvisASCII />
+              <RenderTextASCII
+                ASCII_TEXT={ASCII_TIOELVIS}
+                className="text-[4px]"
+              />
             </SheetHeader>
             <section className="flex flex-col gap-2">
               {ITEMS.map((e) => {
