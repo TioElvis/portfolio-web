@@ -497,3 +497,17 @@ export const ASCII_CONTACT = [
    ╚═╝   
 `,
 ];
+
+export const ASCII_ARROW_DOWN = [
+  `
+    ██║   
+    ██║   
+    ██║   
+██████████╗
+╚████████╔╝
+ ╚██████╔╝ 
+  ╚████╔╝  
+   ╚██╔╝   
+    ╚═╝    
+`,
+];
