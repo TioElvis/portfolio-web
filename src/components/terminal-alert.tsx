@@ -31,18 +31,18 @@ export function TerminalAlert({ alert, delay = 0, animated = false }: Props) {
   return (
     <div ref={alertRef} className="text-xs md:text-sm flex justify-between">
       <div className="flex gap-2">
-        <span>
+        <p>
           [<span className="text-accent">{alert.cause.toUpperCase()}</span>]
-        </span>
-        <span>{alert.message}</span>
+        </p>
+        <p>{alert.message}</p>
       </div>
-      <div>
+      <p>
         [
         <span className={cn(alert.isOk ? "text-primary" : "text-destructive")}>
           {alert.statusMessage.toLocaleUpperCase()}
         </span>
         ]
-      </div>
+      </p>
     </div>
   );
 }
