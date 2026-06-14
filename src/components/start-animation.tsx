@@ -88,7 +88,7 @@ export function StartAnimation({ children }: Props) {
         <MaxWidthWrapper className="flex flex-col items-center justify-center gap-8">
           <RenderTextASCII
             ASCII_TEXT={ASCII_TIOELVIS}
-            className="text-[9px] sm:text-xs md:text-sm"
+            className="text-[7px] md:text-[8px] lg:text-[9px]"
           />
           <section className="w-full md:w-2xl flex flex-col gap-2">
             {ALERTS.map((e, index) => {

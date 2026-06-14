@@ -105,7 +105,7 @@
   }
   p,
   input {
-    @apply text-sm md:text-base;
+    @apply text-xs md:text-sm lg:text-base;
   }
   pre {
     font-family: var(--font-geist-mono), monospace;

@@ -19,7 +19,7 @@ export function Hero() {
   return (
     <section id="hero" className="w-full h-screen py-20">
       <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
-        <section className="w-full flex items-center gap-4 text-[4px]">
+        <section className="w-full flex items-center gap-4 text-[3px] md:text-[4px]">
           <div>
             <RenderTextASCII
               ASCII_TEXT={ASCII_BACKEND}

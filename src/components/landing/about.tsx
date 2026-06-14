@@ -36,7 +36,7 @@ export function About() {
       id="about"
       className="w-full min-h-screen scroll-mt-20 md:scroll-mt-0 md:flex md:justify-center md:items-center">
       <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
-        <div className="flex items-center justify-center gap-4 text-[6px] sm:text-[7px] md:text-[8px] lg:text-[9px]">
+        <div className="flex items-center justify-center gap-4 text-[5px] sm:text-[6px] md:text-[7px] lg:text-[8px]">
           <RenderTextASCII ASCII_TEXT={ASCII_ABOUT} />
           <RenderTextASCII ASCII_TEXT={ASCII_ME} />
         </div>
@@ -59,11 +59,11 @@ export function About() {
                 return (
                   <Card key={name} className="hover:ring-primary/50">
                     <CardHeader>
-                      <Icon className="size-5 text-primary" />
+                      <Icon className="size-6 text-primary" />
+                      <p className="font-bold">{name}</p>
                     </CardHeader>
                     <CardContent>
-                      <h3 className="text-sm font-bold">{name}</h3>
-                      <p className="text-xs">{description}</p>
+                      <p>{description}</p>
                     </CardContent>
                   </Card>
                 );

@@ -59,7 +59,7 @@ export function Navbar() {
             <SheetHeader>
               <RenderTextASCII
                 ASCII_TEXT={ASCII_TIOELVIS}
-                className="text-[4px]"
+                className="text-[3px] md:text-[4px]"
               />
             </SheetHeader>
             <section className="flex flex-col gap-2">

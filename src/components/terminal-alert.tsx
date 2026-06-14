@@ -29,7 +29,9 @@ export function TerminalAlert({ alert, delay = 0, animated = false }: Props) {
   }, []);
 
   return (
-    <div ref={alertRef} className="text-xs md:text-sm flex justify-between">
+    <div
+      ref={alertRef}
+      className="text-xs md:text-sm flex justify-between gap-2">
       <div className="flex gap-2">
         <p>
           [<span className="text-accent">{alert.cause.toUpperCase()}</span>]
