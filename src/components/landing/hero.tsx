@@ -1,7 +1,11 @@
 "use client";
-import { HeroText } from "./hero-text";
-
-import { ASCII_ARROW_DOWN } from "@/lib/ascii";
+import {
+  ASCII_ARROW_DOWN,
+  ASCII_BACKEND,
+  ASCII_DEVELOPER,
+  ASCII_ETHICAL,
+  ASCII_HACKER,
+} from "@/lib/ascii";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -13,12 +17,33 @@ export function Hero() {
   const isMobile = useIsMobile();
 
   return (
-    <section id="hero" className="w-full h-screen md:py-20 pt-20">
+    <section id="hero" className="w-full h-screen py-20">
       <MaxWidthWrapper className="flex flex-col items-center justify-center gap-4">
-        <HeroText />
+        <section className="w-full flex items-center gap-4 text-[4px]">
+          <div>
+            <RenderTextASCII
+              ASCII_TEXT={ASCII_BACKEND}
+              className="text-secondary"
+            />
+            <RenderTextASCII
+              ASCII_TEXT={ASCII_DEVELOPER}
+              className="text-secondary"
+            />
+          </div>
+          <div>
+            <RenderTextASCII
+              ASCII_TEXT={ASCII_ETHICAL}
+              className="text-accent"
+            />
+            <RenderTextASCII
+              ASCII_TEXT={ASCII_HACKER}
+              className="text-accent"
+            />
+          </div>
+        </section>
         <InteractiveShell />
         {isMobile && (
-          <div className="w-full h-72 flex items-center justify-center">
+          <div className="w-full h-48 flex items-center justify-center">
             <RenderTextASCII
               ASCII_TEXT={ASCII_ARROW_DOWN}
               className="text-[6px]"
