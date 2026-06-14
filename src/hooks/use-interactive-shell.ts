@@ -182,6 +182,20 @@ export function useInteractiveShell() {
         ];
 
         setDisplay(_display);
+      } else if (!file?.name.endsWith(".url")) {
+        const alert: Alert = {
+          cause: "error",
+          message: "File must end with .url",
+          isOk: false,
+          statusMessage: "400",
+        };
+
+        const _display: DisplayItem[] = [
+          ...display,
+          { type: "alert", c: alert },
+        ];
+
+        setDisplay(_display);
       } else {
         const commandDisplay: Command = {
           arguments: [],
