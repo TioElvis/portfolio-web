@@ -18,8 +18,6 @@ interface Props {
 }
 
 export function RepositoryCard({ repository }: Props) {
-  console.log(repository);
-
   return (
     <Card className="w-full">
       <CardHeader>
@@ -27,7 +25,9 @@ export function RepositoryCard({ repository }: Props) {
         <CardDescription>{repository.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <span className="text-primary text-xs">{repository.language}</span>
+        <p>
+          Language: <span className="text-primary">{repository.language}</span>
+        </p>
       </CardContent>
       <CardFooter className="gap-4 justify-end">
         {repository.homepage && (
