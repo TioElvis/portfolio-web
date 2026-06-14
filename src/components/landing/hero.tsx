@@ -18,7 +18,7 @@ export function Hero() {
         <HeroText />
         <InteractiveShell />
         {isMobile && (
-          <div className="w-full h-48 flex items-center justify-center">
+          <div className="w-full h-72 flex items-center justify-center">
             <RenderTextASCII
               ASCII_TEXT={ASCII_ARROW_DOWN}
               className="text-[6px]"
