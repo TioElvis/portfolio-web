@@ -50,8 +50,8 @@ export function About() {
                 in order to continuously sharpen my skills and knowledge.
               </p>
               <p>
-                So I use this portfolio/blog to documentate my projects and
-                share my knowledge.
+                So I use this portfolio/blog to show my projects and share my
+                knowledge.
               </p>
             </div>
             <section className="flex flex-col gap-4">
