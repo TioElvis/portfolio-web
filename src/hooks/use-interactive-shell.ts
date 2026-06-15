@@ -253,6 +253,8 @@ export function useInteractiveShell() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Tab") e.preventDefault();
+
     if (e.key === "Enter") {
       e.preventDefault();
       handleEnterKey();
