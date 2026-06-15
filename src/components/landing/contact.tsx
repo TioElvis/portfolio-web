@@ -62,7 +62,7 @@ export function Contact() {
           <div className="flex-1 p-4 rounded-md">
             <RenderTextASCII
               ASCII_TEXT={ASCII_PENGUIN}
-              className="text-[6px] sm:text-[7px] md:text-[8px]"
+              className="text-[6px] sm:text-[7px] md:text-[8px] lg:text-[12px]"
             />
           </div>
         </div>
