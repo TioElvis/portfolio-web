@@ -1,8 +1,9 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 
 import { cn } from "@/lib/utils";
+import { SITE, SITE_URL } from "@/lib/site";
 
 import { GSAPProvider } from "@/providers/gsap";
 
@@ -14,32 +15,53 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
-  creator: "Elvis Vera",
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "TioElvis | Elvis Vera - Personal Portfolio",
-    template: "%s | TioElvis",
+    default: SITE.title,
+    template: `%s | ${SITE.name}`,
   },
-  description:
-    "Elvis Vera (TioElvis): backend developer and ethical hacker. Projects, skills and contact.",
+  description: SITE.description,
+  applicationName: SITE.name,
+  authors: [{ name: SITE.author, url: SITE_URL }],
+  creator: SITE.author,
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
   openGraph: {
-    type: "website",
-    siteName: "TioElvis",
+    type: "profile",
+    url: "/",
+    siteName: SITE.name,
+    title: SITE.title,
+    description: SITE.description,
     locale: "en_US",
+    firstName: "Elvis",
+    lastName: "Vera",
+    username: "TioElvis",
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.title,
+    description: SITE.description,
+  },
   keywords: [
     "Elvis Vera",
     "TioElvis",
-    "Software Development",
-    "Personal blog",
-    "Portfolio",
-    "Programming",
-    "Cybersecurity",
-    "Backend",
+    "backend developer",
+    "ethical hacker",
+    "cybersecurity",
+    "Node.js",
+    "NestJS",
+    "Next.js",
+    "portfolio",
   ],
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0d1117",
+  colorScheme: "dark",
 };
 
 interface Props {

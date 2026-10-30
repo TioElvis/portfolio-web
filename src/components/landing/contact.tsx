@@ -5,6 +5,7 @@ import {
   IconBrandYoutube,
 } from "@tabler/icons-react";
 
+import { SITE } from "@/lib/site";
 import { ASCII_CONTACT, ASCII_ME, ASCII_PENGUIN } from "@/lib/ascii";
 
 import { CopyEmail } from "./copy-email";
@@ -14,23 +15,21 @@ import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { SectionHeading } from "@/components/section-heading";
 import { RenderTextASCII } from "@/components/render-text-ascii";
 
-const EMAIL = "elvis.veramijares@gmail.com";
-
 const CONTACTS = [
   {
     name: "Github",
     icon: IconBrandGithub,
-    to: "https://github.com/TioElvis",
+    to: SITE.github,
   },
   {
     name: "Linkedin",
     icon: IconBrandLinkedin,
-    to: "https://www.linkedin.com/in/elvis-vera-3657ba365/",
+    to: SITE.linkedin,
   },
   {
     name: "Youtube",
     icon: IconBrandYoutube,
-    to: "https://www.youtube.com/@tioelvis4615",
+    to: SITE.youtube,
   },
 ];
 
@@ -52,7 +51,7 @@ export function Contact() {
               Have a project, a job offer or a question? Write me and I&apos;ll
               get back to you.
             </p>
-            <CopyEmail email={EMAIL} />
+            <CopyEmail email={SITE.email} />
             <ul className="grid grid-cols-3 gap-2">
               {CONTACTS.map((e) => {
                 return (
