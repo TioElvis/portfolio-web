@@ -43,6 +43,13 @@
 
   --color-destructive: var(--destructive);
 
+  /* Names used by the shadcn components */
+  --color-code: var(--background-code);
+  --color-muted: var(--background-surface);
+  --color-card-foreground: var(--text-primary);
+  --color-input: var(--border);
+  --color-ring: var(--green-base);
+
   --font-mono: var(--font-geist-mono);
 }
 
@@ -114,4 +121,9 @@
   button {
     @apply cursor-pointer;
   }
+}
+
+/* Returning visitors and reduced motion skip the boot screen (set before paint in the layout) */
+html[data-boot="skip"] [data-slot="boot-screen"] {
+  display: none;
 }

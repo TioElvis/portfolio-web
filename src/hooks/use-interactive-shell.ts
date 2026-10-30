@@ -13,6 +13,8 @@ type File = {
 
 const COMMANDS = ["ls", "cat", "clear", "go", "help"];
 
+export const SUGGESTED_COMMANDS = ["help", "ls", "cat README.txt", "go github"];
+
 const HELP_DISPLAY_ITEMS: DisplayItem[] = [
   {
     type: "alert",
@@ -27,7 +29,7 @@ const HELP_DISPLAY_ITEMS: DisplayItem[] = [
     type: "alert",
     c: {
       cause: "help",
-      message: `The command "go" allows you to go directly to a file .url`,
+      message: `"go github" opens a .url file. Tab completes commands and files`,
       isOk: true,
       statusMessage: "ok",
     },
@@ -36,7 +38,7 @@ const HELP_DISPLAY_ITEMS: DisplayItem[] = [
     type: "alert",
     c: {
       cause: "help",
-      message: `Is there a secret?`,
+      message: `Is there a secret? Hidden files start with a dot`,
       isOk: false,
       statusMessage: "401",
     },
@@ -60,7 +62,7 @@ const FILES: File[] = [
   {
     name: "README.txt",
     content:
-      "Hello world, I was working here and I think there is a hidden file",
+      "Hello world, I was working here and I think there is a hidden file (try ls -a)",
   },
   {
     name: "Linkedin.url",
@@ -80,6 +82,49 @@ const FILES: File[] = [
   },
 ];
 
+const error = (message: string, statusMessage: string): DisplayItem => ({
+  type: "alert",
+  c: { cause: "error", message, isOk: false, statusMessage },
+});
+
+const output = (text: string): DisplayItem => ({
+  type: "command",
+  c: { arguments: [], return: text },
+});
+
+// "github", "Github.url" and "github.URL" all find the same file
+function findFile(name: string | undefined) {
+  if (!name) return undefined;
+  const wanted = name.toLowerCase();
+
+  return FILES.find((e) => {
+    const file = e.name.toLowerCase();
+    return file === wanted || file === `${wanted}.url`;
+  });
+}
+
+function complete(input: string) {
+  const [command, ...args] = input.trimStart().split(/\s+/);
+
+  if (args.length === 0) {
+    const matches = COMMANDS.filter((e) => e.startsWith(command.toLowerCase()));
+    return matches.length === 1 ? `${matches[0]} ` : input;
+  }
+
+  if (args.length === 1 && (command === "cat" || command === "go")) {
+    const prefix = args[0].toLowerCase();
+    const matches = FILES.filter(
+      (e) =>
+        e.name.toLowerCase().startsWith(prefix) &&
+        (prefix.startsWith(".") || !e.name.startsWith(".")) &&
+        (command === "cat" || e.name.endsWith(".url")),
+    );
+    return matches.length === 1 ? `${command} ${matches[0].name}` : input;
+  }
+
+  return input;
+}
+
 export function useInteractiveShell() {
   const [input, setInput] = useState("");
   const [display, setDisplay] = useState<DisplayItem[]>(INIT_DISPLAY_ITEMS);
@@ -87,147 +132,61 @@ export function useInteractiveShell() {
   const [history, setHistory] = useState<string[]>([]);
   const [historyCurrentIndex, setCurrentHistoryIndex] = useState(0);
 
-  const handleEnterKey = () => {
-    if (!input.trim()) return;
-
-    const [command, ...args] = input.split(" ");
-
-    if (!COMMANDS.includes(command)) {
-      const alert: Alert = {
-        cause: "error",
-        message: "Command not found",
-        isOk: false,
-        statusMessage: "404",
-      };
-
-      const _display: DisplayItem[] = [...display, { type: "alert", c: alert }];
-
-      setDisplay(_display);
-    }
-
-    const _args = args[0];
+  const execute = (line: string): DisplayItem[] | null => {
+    const [rawCommand, ...args] = line.trim().split(/\s+/);
+    const command = rawCommand.toLowerCase();
 
     if (command === "ls") {
-      let command: Command = {
-        arguments: [],
-        return: "",
-      };
-
-      if (_args && _args === "-a") {
-        const files = FILES.map((e) => e.name).join(" ");
-
-        command.return = files;
-      } else {
-        const files = FILES.filter((e) => !e.name.startsWith("."))
-          .map((e) => e.name)
-          .join(" ");
-
-        command.return = files;
-      }
-
-      const _display: DisplayItem[] = [
-        ...display,
-        { type: "command", c: command },
-      ];
-
-      setDisplay(_display);
+      const showHidden = args.some((e) => /^-\w*a/.test(e));
+      const files = FILES.filter((e) => showHidden || !e.name.startsWith("."));
+      return [output(files.map((e) => e.name).join(" "))];
     }
 
     if (command === "cat") {
-      const file = FILES.find((e) => e.name === _args);
-
-      if (!file) {
-        const alert: Alert = {
-          cause: "error",
-          message: "File not found",
-          isOk: false,
-          statusMessage: "404",
-        };
-
-        const _display: DisplayItem[] = [
-          ...display,
-          { type: "alert", c: alert },
-        ];
-
-        setDisplay(_display);
-      } else {
-        const command: Command = {
-          arguments: [],
-          return: file.content,
-        };
-
-        const _display: DisplayItem[] = [
-          ...display,
-          { type: "command", c: command },
-        ];
-
-        setDisplay(_display);
-      }
+      const file = findFile(args[0]);
+      return [file ? output(file.content) : error("File not found", "404")];
     }
 
     if (command === "go") {
-      const file = FILES.find((e) => e.name === _args);
+      const file = findFile(args[0]);
 
-      if (!file) {
-        const alert: Alert = {
-          cause: "error",
-          message: "File not found",
-          isOk: false,
-          statusMessage: "404",
-        };
-
-        const _display: DisplayItem[] = [
-          ...display,
-          { type: "alert", c: alert },
-        ];
-
-        setDisplay(_display);
-      } else if (!file?.name.endsWith(".url")) {
-        const alert: Alert = {
-          cause: "error",
-          message: "File must end with .url",
-          isOk: false,
-          statusMessage: "400",
-        };
-
-        const _display: DisplayItem[] = [
-          ...display,
-          { type: "alert", c: alert },
-        ];
-
-        setDisplay(_display);
-      } else {
-        const commandDisplay: Command = {
-          arguments: [],
-          return: `Open new page to ${file.name}`,
-        };
-
-        const _display: DisplayItem[] = [
-          ...display,
-          { type: "command", c: commandDisplay },
-        ];
-
-        window.open(file.content, "_blank", "noopener,noreferrer");
-
-        setDisplay(_display);
+      if (!file) return [error("File not found", "404")];
+      if (!file.name.endsWith(".url")) {
+        return [error("File must end with .url", "400")];
       }
+
+      window.open(file.content, "_blank", "noopener,noreferrer");
+      return [output(`Open new page to ${file.name}`)];
     }
+
+    if (command === "help") return HELP_DISPLAY_ITEMS;
+
+    return null;
+  };
+
+  const run = (line: string) => {
+    if (!line.trim()) return;
+
+    const command = line.trim().split(/\s+/)[0].toLowerCase();
 
     if (command === "clear") {
       setDisplay([]);
+    } else {
+      const items = execute(line);
+      setDisplay((prev) => [
+        ...prev,
+        ...(items ?? [error("Command not found", "404")]),
+      ]);
     }
 
-    if (command === "help") {
-      const _display: DisplayItem[] = [...display, ...HELP_DISPLAY_ITEMS];
-
-      setDisplay(_display);
+    // Only valid commands are worth recalling with the arrows
+    if (COMMANDS.includes(command)) {
+      const newHistory = [...history, line.trim()];
+      setHistory(newHistory);
+      setCurrentHistoryIndex(newHistory.length);
+    } else {
+      setCurrentHistoryIndex(history.length);
     }
-
-    const newHistory = [...history, input];
-    const newIndex = newHistory.length;
-
-    setHistory(newHistory);
-    setCurrentHistoryIndex(newIndex);
 
     setInput("");
   };
@@ -253,11 +212,16 @@ export function useInteractiveShell() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Tab") e.preventDefault();
+    if (e.key === "Tab") {
+      // Let Tab leave the shell when there is nothing to complete
+      if (!input.trim()) return;
+      e.preventDefault();
+      setInput(complete(input));
+    }
 
     if (e.key === "Enter") {
       e.preventDefault();
-      handleEnterKey();
+      run(input);
     }
 
     if (e.key === "ArrowUp") {
@@ -271,5 +235,5 @@ export function useInteractiveShell() {
     }
   };
 
-  return { input, setInput, handleKeyDown, display };
+  return { input, setInput, handleKeyDown, display, run };
 }

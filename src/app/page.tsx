@@ -6,15 +6,18 @@ import { Header } from "@/components/landing/header";
 import { Contact } from "@/components/landing/contact";
 import { Projects } from "@/components/landing/projects";
 
-export const dynamic = "force-dynamic";
+// Repositories are fetched again at most once an hour
+export const revalidate = 3600;
 
 export default function Page() {
   return (
     <Fragment>
       <Header />
-      <Hero />
-      <About />
-      <Projects />
+      <main>
+        <Hero />
+        <About />
+        <Projects />
+      </main>
       <Contact />
     </Fragment>
   );

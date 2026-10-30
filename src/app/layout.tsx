@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { GSAPProvider } from "@/providers/gsap";
 
-import { StartAnimation } from "@/components/start-animation";
+import { BOOT_SCRIPT, StartAnimation } from "@/components/start-animation";
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -38,7 +38,13 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   return (
-    <html lang="en" className={cn(jetBrainsMono.variable)}>
+    <html
+      lang="en"
+      className={cn(jetBrainsMono.variable)}
+      suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
+      </head>
       <GSAPProvider>
         <body>
           <StartAnimation>{children}</StartAnimation>

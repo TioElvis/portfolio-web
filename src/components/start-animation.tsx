@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { Alert } from "@/types/terminal";
 
@@ -10,7 +10,10 @@ import { TerminalAlert } from "./terminal-alert";
 import { MaxWidthWrapper } from "./max-width-wrapper";
 import { RenderTextASCII } from "./render-text-ascii";
 
-import { useIsMounted } from "@/hooks/use-is-mounted";
+export const BOOT_SEEN_KEY = "boot-seen";
+
+// Runs before paint: the boot screen only plays once per session
+export const BOOT_SCRIPT = `try{if(sessionStorage.getItem("${BOOT_SEEN_KEY}")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.dataset.boot="skip"}catch(e){}`;
 
 export const ALERTS: { alert: Alert; delay: number }[] = [
   {
@@ -66,45 +69,63 @@ interface Props {
 }
 
 export function StartAnimation({ children }: Props) {
-  const [showLanding, setShowLanding] = useState(false);
-
-  const isMounted = useIsMounted();
+  const [showBoot, setShowBoot] = useState(true);
 
   useEffect(() => {
-    if (!isMounted) return;
+    if (document.documentElement.dataset.boot === "skip") {
+      setShowBoot(false);
+      return;
+    }
 
-    const timeoutId = setTimeout(() => setShowLanding(true), 4000);
+    try {
+      sessionStorage.setItem(BOOT_SEEN_KEY, "1");
+    } catch {}
 
-    return () => clearTimeout(timeoutId);
-  }, [isMounted]);
+    const skip = () => setShowBoot(false);
+    const timeoutId = setTimeout(skip, 4000);
 
-  if (!isMounted) return null;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", skip);
+    window.addEventListener("pointerdown", skip);
+
+    return () => {
+      clearTimeout(timeoutId);
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", skip);
+      window.removeEventListener("pointerdown", skip);
+    };
+  }, []);
 
   return (
-    <main className="w-full h-screen">
-      {showLanding ? (
-        <Fragment>{children}</Fragment>
-      ) : (
-        <MaxWidthWrapper className="flex flex-col items-center justify-center gap-8">
-          <RenderTextASCII
-            ASCII_TEXT={ASCII_TIOELVIS}
-            className="text-[7px] md:text-[8px] lg:text-[9px]"
-          />
-          <section className="w-full md:w-2xl flex flex-col gap-2">
-            {ALERTS.map((e, index) => {
-              return (
-                <TerminalAlert
-                  alert={e.alert}
-                  delay={e.delay}
-                  key={index}
-                  animated
-                />
-              );
-            })}
-          </section>
-          <LoadingBar />
-        </MaxWidthWrapper>
+    <>
+      {children}
+      {showBoot && (
+        <div
+          data-slot="boot-screen"
+          aria-hidden
+          className="fixed inset-0 z-[60] bg-background">
+          <MaxWidthWrapper className="flex flex-col items-center justify-center gap-8">
+            <RenderTextASCII
+              ASCII_TEXT={ASCII_TIOELVIS}
+              className="text-[7px] md:text-[8px] lg:text-[9px]"
+            />
+            <section className="w-full md:w-2xl flex flex-col gap-2">
+              {ALERTS.map((e, index) => {
+                return (
+                  <TerminalAlert
+                    alert={e.alert}
+                    delay={e.delay}
+                    key={index}
+                    animated
+                  />
+                );
+              })}
+            </section>
+            <LoadingBar />
+            <p className="text-ghost-foreground">Press any key to skip</p>
+          </MaxWidthWrapper>
+        </div>
       )}
-    </main>
+    </>
   );
 }
