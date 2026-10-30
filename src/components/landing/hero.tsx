@@ -53,8 +53,7 @@ export function Hero() {
           </h1>
           <p className="max-w-2xl text-muted-foreground">
             Born in Caracas, Venezuela. I build web applications with Node.js,
-            NestJS and Next.js, and I study how to break them so they stay
-            secure.
+            NestJS and Next.js, and I&apos;m currently focusing on cybersecurity.
           </p>
           <div className="flex flex-wrap gap-3">
             <a

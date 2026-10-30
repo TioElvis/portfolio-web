@@ -10,17 +10,18 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 const ABILITIES = [
   {
     name: "Frontend",
-    description: "React, Next.js, TypeScript, Tailwind CSS, GSAP.",
+    description: "TypeScript, React, Next.js, Tailwind CSS, GSAP.",
     Icon: IconCode,
   },
   {
     name: "Backend",
-    description: "Node.js, NestJS, PostgreSQL, MongoDB.",
+    description:
+      "Node.js, Express, Fastify, NestJS, Prisma, PostgreSQL, MongoDB, DevOps.",
     Icon: IconServer,
   },
   {
     name: "Cybersecurity",
-    description: "Pentesting, system defense, Kali Linux.",
+    description: "Pentesting, system hardening, Linux, Kali Linux.",
     Icon: IconLock,
   },
 ];
@@ -56,8 +57,7 @@ export function About() {
                 skills and knowledge.
               </p>
               <p className="text-muted-foreground">
-                I use this portfolio to show my projects and share what I
-                learn.
+                I use this portfolio to show my projects and share what I learn.
               </p>
             </div>
             <ul className="grid gap-4 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
