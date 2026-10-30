@@ -14,12 +14,22 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  ),
   creator: "Elvis Vera",
   title: {
     default: "TioElvis | Elvis Vera - Personal Portfolio",
     template: "%s | TioElvis",
   },
-  description: "Personal portfolio created by Elvis Vera (TioElvis).",
+  description:
+    "Elvis Vera (TioElvis): backend developer and ethical hacker. Projects, skills and contact.",
+  openGraph: {
+    type: "website",
+    siteName: "TioElvis",
+    locale: "en_US",
+  },
+  twitter: { card: "summary_large_image" },
   keywords: [
     "Elvis Vera",
     "TioElvis",

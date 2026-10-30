@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { IconFolder } from "@tabler/icons-react";
+import { IconArrowUpRight, IconFolder } from "@tabler/icons-react";
 
 import { getAllRepositories } from "@/lib/octokit";
 import { ASCII_LAST, ASCII_PROJECTS } from "@/lib/ascii";
@@ -13,20 +12,24 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
-import { RenderTextASCII } from "@/components/render-text-ascii";
+import { SectionHeading } from "@/components/section-heading";
 
 export async function Projects() {
   const repositories = await getAllRepositories({ per_page: 3 });
 
   return (
-    <section id="projects" className="w-full h-dvh scroll-mt-20">
-      <MaxWidthWrapper className="flex flex-col gap-4">
-        <div className="flex items-center justify-center gap-4 text-[4px] sm:text-[6px] md:text-[7px] lg:text-[8px]">
-          <RenderTextASCII ASCII_TEXT={ASCII_LAST} />
-          <RenderTextASCII ASCII_TEXT={ASCII_PROJECTS} />
-        </div>
+    <section
+      id="projects"
+      aria-labelledby="projects-title"
+      className="w-full py-20 md:py-28">
+      <MaxWidthWrapper className="flex flex-col items-center gap-10">
+        <SectionHeading
+          id="projects-title"
+          title="last projects"
+          ascii={[ASCII_LAST, ASCII_PROJECTS]}
+        />
         {repositories.length === 0 && (
           <Empty className="max-w-96">
             <EmptyHeader>
@@ -40,23 +43,23 @@ export async function Projects() {
             </EmptyHeader>
           </Empty>
         )}
-        <div className="w-full flex flex-col gap-4">
+        <ul className="w-full grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {repositories.map((e) => {
-            return <RepositoryCard key={e.html_url} repository={e} />;
+            return (
+              <li key={e.html_url} className="flex">
+                <RepositoryCard repository={e} />
+              </li>
+            );
           })}
-        </div>
+        </ul>
         {repositories.length > 0 && (
-          <Button
-            nativeButton={false}
-            variant="link"
-            render={
-              <Link
-                href="https://github.com/TioElvis?tab=repositories"
-                target="_blank">
-                View all
-              </Link>
-            }
-          />
+          <a
+            href="https://github.com/TioElvis?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonVariants({ variant: "link" })}>
+            View all on GitHub <IconArrowUpRight aria-hidden />
+          </a>
         )}
       </MaxWidthWrapper>
     </section>

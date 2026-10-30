@@ -72,9 +72,10 @@ export function StartAnimation({ children }: Props) {
   const [showBoot, setShowBoot] = useState(true);
 
   useEffect(() => {
+    // Already hidden by CSS: just drop it from the DOM
     if (document.documentElement.dataset.boot === "skip") {
-      setShowBoot(false);
-      return;
+      const frameId = requestAnimationFrame(() => setShowBoot(false));
+      return () => cancelAnimationFrame(frameId);
     }
 
     try {
