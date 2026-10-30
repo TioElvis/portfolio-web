@@ -33,9 +33,9 @@ export function LoadingBar() {
   return (
     <section
       ref={sectionRef}
-      className="w-full md:w-2xl flex items-center gap-2">
+      className="w-full md:w-2xl flex items-center gap-2 opacity-0">
       <div className="flex-1">
-        <div ref={loadingBarRef} className="h-4 bg-foreground"></div>
+        <div ref={loadingBarRef} className="h-4 w-0 bg-foreground"></div>
       </div>
       <span className="text-primary">{progress}%</span>
     </section>

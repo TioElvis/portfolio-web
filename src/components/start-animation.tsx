@@ -82,24 +82,26 @@ export function StartAnimation({ children }: Props) {
       sessionStorage.setItem(BOOT_SEEN_KEY, "1");
     } catch {}
 
-    const skip = () => setShowBoot(false);
-    const timeoutId = setTimeout(skip, 4000);
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", skip);
-    window.addEventListener("pointerdown", skip);
-
-    return () => {
+    const cleanup = () => {
       clearTimeout(timeoutId);
-      document.body.style.overflow = "";
       window.removeEventListener("keydown", skip);
       window.removeEventListener("pointerdown", skip);
     };
+    const skip = () => {
+      setShowBoot(false);
+      cleanup();
+    };
+    const timeoutId = setTimeout(skip, 4000);
+
+    window.addEventListener("keydown", skip);
+    window.addEventListener("pointerdown", skip);
+
+    return cleanup;
   }, []);
 
+  // The boot screen comes first so it is painted before any of the page streams in
   return (
     <>
-      {children}
       {showBoot && (
         <div
           data-slot="boot-screen"
@@ -127,6 +129,7 @@ export function StartAnimation({ children }: Props) {
           </MaxWidthWrapper>
         </div>
       )}
+      {children}
     </>
   );
 }
