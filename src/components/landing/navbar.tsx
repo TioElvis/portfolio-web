@@ -1,85 +1,79 @@
 "use client";
 import { useState } from "react";
-import { Fragment } from "react/jsx-runtime";
 import { IconMenu2 } from "@tabler/icons-react";
 
-import { ASCII_TIOELVIS } from "@/lib/ascii";
+import { cn } from "@/lib/utils";
 
 import {
   Sheet,
   SheetContent,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { RenderTextASCII } from "@/components/render-text-ascii";
+import { Logo } from "@/components/logo";
+import { Button, buttonVariants } from "@/components/ui/button";
 
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useIsMounted } from "@/hooks/use-is-mounted";
+import { useActiveSection } from "@/hooks/use-active-section";
 
 const ITEMS = ["about", "projects", "contact"];
 
-function scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  if (!el) return;
-
-  el.scrollIntoView({ behavior: "smooth" });
-}
 export function Navbar() {
-  const isMobile = useIsMobile();
-  const isMounted = useIsMounted();
-
   const [open, setOpen] = useState(false);
-
-  if (!isMounted) return null;
+  const active = useActiveSection(ITEMS);
 
   return (
-    <nav className="flex items-center gap-1">
-      {!isMobile && (
-        <Fragment>
-          {ITEMS.map((e) => {
-            return (
-              <Button key={e} onClick={() => scrollToSection(e)}>
-                {e.toUpperCase()}
-              </Button>
-            );
-          })}
-        </Fragment>
-      )}
-      {isMobile && (
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger
-            render={
-              <Button>
-                <IconMenu2 />
-              </Button>
-            }
-          />
-          <SheetContent className="space-y-4">
-            <SheetHeader>
-              <RenderTextASCII
-                ASCII_TEXT={ASCII_TIOELVIS}
-                className="text-[3px] md:text-[4px]"
-              />
-            </SheetHeader>
-            <section className="flex flex-col gap-2">
-              {ITEMS.map((e) => {
-                return (
-                  <Button
-                    variant="link"
-                    key={e}
-                    onClick={() => {
-                      scrollToSection(e);
-                      setOpen(false);
-                    }}>
-                    {e.toUpperCase()}
-                  </Button>
-                );
-              })}
-            </section>
-          </SheetContent>
-        </Sheet>
-      )}
+    <nav aria-label="Main" className="flex items-center gap-1">
+      <ul className="hidden md:flex items-center gap-1">
+        {ITEMS.map((e) => {
+          return (
+            <li key={e}>
+              <a
+                href={`#${e}`}
+                aria-current={active === e ? "location" : undefined}
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "uppercase text-muted-foreground aria-[current]:text-primary",
+                )}>
+                {e}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger
+          render={
+            <Button variant="ghost" size="icon" className="md:hidden">
+              <IconMenu2 />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          }
+        />
+        <SheetContent className="space-y-4">
+          <SheetHeader>
+            <SheetTitle render={<Logo onClick={() => setOpen(false)} />} />
+          </SheetHeader>
+          <ul className="flex flex-col gap-2 px-4">
+            {ITEMS.map((e) => {
+              return (
+                <li key={e}>
+                  <a
+                    href={`#${e}`}
+                    aria-current={active === e ? "location" : undefined}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "lg" }),
+                      "w-full justify-start uppercase text-muted-foreground aria-[current]:text-primary",
+                    )}>
+                    <span className="text-primary">&gt;</span> {e}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </SheetContent>
+      </Sheet>
     </nav>
   );
 }

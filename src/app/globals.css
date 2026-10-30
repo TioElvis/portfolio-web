@@ -93,7 +93,11 @@
 
 @layer base {
   html {
-    @apply antialiased font-mono;
+    @apply antialiased font-mono scroll-smooth;
+  }
+  section[id],
+  footer[id] {
+    @apply scroll-mt-14;
   }
   body {
     @apply min-h-screen flex flex-col bg-background text-foreground;
@@ -112,7 +116,7 @@
   }
   p,
   input {
-    @apply text-xs md:text-sm lg:text-base;
+    @apply text-sm lg:text-base;
   }
   pre {
     font-family: var(--font-geist-mono), monospace;
@@ -126,4 +130,17 @@
 /* Returning visitors and reduced motion skip the boot screen (set before paint in the layout) */
 html[data-boot="skip"] [data-slot="boot-screen"] {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
