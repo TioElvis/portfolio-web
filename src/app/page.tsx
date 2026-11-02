@@ -7,9 +7,6 @@ import { Contact } from "@/components/landing/contact";
 import { Projects } from "@/components/landing/projects";
 import { StructuredData } from "@/components/structured-data";
 
-// Repositories are fetched again at most once an hour
-export const revalidate = 3600;
-
 export default function Page() {
   return (
     <Fragment>

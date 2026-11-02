@@ -4,7 +4,8 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
-const USERNAME = process.env.GITHUB_USERNAME ?? "TioElvis";
+// `||` so an empty value in .env still falls back
+const USERNAME = process.env.GITHUB_USERNAME || "TioElvis";
 
 interface GetAllRepositoriesProps {
   per_page: number;
@@ -15,12 +16,22 @@ export async function getAllRepositories(props: GetAllRepositoriesProps) {
     const { data } = await octokit.repos.listForUser({
       username: USERNAME,
       type: "owner",
-      per_page: props.per_page,
-      sort: "updated",
+      per_page: 30,
+      sort: "pushed",
     });
 
+    // The profile README repo and forks are not projects
+    const projects = data
+      .filter(
+        (repo) =>
+          !repo.fork &&
+          !repo.archived &&
+          repo.name.toLowerCase() !== USERNAME.toLowerCase(),
+      )
+      .slice(0, props.per_page);
+
     return await Promise.all(
-      data.map(async (repo) => {
+      projects.map(async (repo) => {
         const { data: languages } = await octokit.repos.listLanguages({
           owner: USERNAME,
           repo: repo.name,
